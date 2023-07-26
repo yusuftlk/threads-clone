@@ -2,7 +2,16 @@ package com.project.threadsclone.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.*;
 
+@Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@Builder
+@ToString
+@Table(name = "follower")
 public class Follower {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -11,4 +20,6 @@ public class Follower {
     @JoinColumn(name = "user_id")
     @JsonIgnore
     private User user;
+
+    private String userName;
 }

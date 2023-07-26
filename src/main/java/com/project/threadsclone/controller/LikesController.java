@@ -1,8 +1,14 @@
 package com.project.threadsclone.controller;
 
+import com.project.threadsclone.dto.LikesDto;
+import com.project.threadsclone.dto.converter.LikesDtoConverter;
+import com.project.threadsclone.dto.request.CreateLikesRequest;
+import com.project.threadsclone.model.Likes;
+import com.project.threadsclone.model.Post;
 import com.project.threadsclone.service.LikesService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.project.threadsclone.service.PostService;
+import com.project.threadsclone.service.UserService;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/likes")
@@ -11,5 +17,14 @@ public class LikesController {
 
     public LikesController(LikesService likesService) {
         this.likesService = likesService;
+    }
+
+    @PostMapping
+    public LikesDto createLikes(@RequestBody CreateLikesRequest createLikesRequest){
+        return likesService.createLikes(createLikesRequest);
+    }
+    @DeleteMapping("/{id}")
+    public void deleteLikes(@PathVariable Long id){
+        likesService.deleteLikes(id);
     }
 }

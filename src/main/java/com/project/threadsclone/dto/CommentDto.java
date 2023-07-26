@@ -1,10 +1,17 @@
 package com.project.threadsclone.dto;
 
-import java.time.LocalDateTime;
+import lombok.*;
 
+import java.time.LocalDateTime;
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@EqualsAndHashCode
+@ToString
 public class CommentDto {
     private Long id;
-    private PostDto post;
     private UserDto user;
     private String comment;
     private LocalDateTime createdAt;

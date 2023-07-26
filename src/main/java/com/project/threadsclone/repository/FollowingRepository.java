@@ -1,4 +1,7 @@
 package com.project.threadsclone.repository;
 
-public interface FollowingRepository {
+import com.project.threadsclone.model.Following;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface FollowingRepository extends JpaRepository<Following, Long> {
 }

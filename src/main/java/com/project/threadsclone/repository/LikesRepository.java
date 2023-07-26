@@ -1,4 +1,7 @@
 package com.project.threadsclone.repository;
 
-public interface LikesRepository {
+import com.project.threadsclone.model.Likes;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface LikesRepository extends JpaRepository<Likes, Long> {
 }

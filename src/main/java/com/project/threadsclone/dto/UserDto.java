@@ -19,5 +19,4 @@ public class UserDto {
     private LocalDateTime createdAt;
     private List<FollowerDto> followers;
     private List<FollowingDto> followings;
-    private List<PostDto> posts;
 }
