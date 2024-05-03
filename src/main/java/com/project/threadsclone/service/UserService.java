@@ -4,6 +4,7 @@ import com.project.threadsclone.dto.UserDto;
 import com.project.threadsclone.dto.converter.UserDtoConverter;
 import com.project.threadsclone.dto.request.CreateUserRequest;
 import com.project.threadsclone.dto.request.UpdateUserRequest;
+import com.project.threadsclone.exception.UserNotFoundException;
 import com.project.threadsclone.model.User;
 import com.project.threadsclone.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class UserService {
     }
 
     public UserDto getUserByUserName(String userName) {
-        return userDtoConverter.convert(userRepository.findByUserName(userName));
+        return userDtoConverter.convert(userRepository.findByUserName(userName).orElseThrow(() -> new UserNotFoundException("User Not Found userName : " + userName)));
     }
 
     public UserDto createUser(CreateUserRequest createUserRequest) {
@@ -51,7 +52,8 @@ public class UserService {
     }
 
     protected User findUserById(Long id){
-        return userRepository.findById(id).orElseThrow(null);
+        return userRepository.findById(id).orElseThrow(() ->
+                new UserNotFoundException("User Not Found id : " + id));
     }
 
     public void deleteUserById(Long id) {

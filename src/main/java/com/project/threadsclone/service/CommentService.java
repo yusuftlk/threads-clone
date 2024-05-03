@@ -4,6 +4,7 @@ import com.project.threadsclone.dto.CommentDto;
 import com.project.threadsclone.dto.converter.CommentDtoConverter;
 import com.project.threadsclone.dto.request.CreateCommentRequest;
 import com.project.threadsclone.dto.request.UpdateCommentRequest;
+import com.project.threadsclone.exception.CommentNotFoundException;
 import com.project.threadsclone.model.Comment;
 import com.project.threadsclone.model.Post;
 import com.project.threadsclone.model.User;
@@ -49,6 +50,6 @@ public class CommentService {
     }
 
     protected Comment findCommentById(Long id){
-        return commentRepository.findById(id).orElseThrow(null);
+        return commentRepository.findById(id).orElseThrow(() -> new CommentNotFoundException("Comment not found with id: " + id));
     }
 }

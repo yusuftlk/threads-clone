@@ -4,6 +4,7 @@ import com.project.threadsclone.dto.PostDto;
 import com.project.threadsclone.dto.converter.PostDtoConverter;
 import com.project.threadsclone.dto.request.CreatePostRequest;
 import com.project.threadsclone.dto.request.UpdatePostRequest;
+import com.project.threadsclone.exception.PostNotFoundException;
 import com.project.threadsclone.model.Post;
 import com.project.threadsclone.model.User;
 import com.project.threadsclone.repository.PostRepository;
@@ -60,6 +61,6 @@ public class PostService {
     }
     protected Post findPostById(Long id){
 
-        return postRepository.findById(id).orElseThrow(null);
+        return postRepository.findById(id).orElseThrow(() -> new PostNotFoundException("Post not found with id: " + id));
     }
 }
