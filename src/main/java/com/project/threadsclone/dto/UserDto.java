@@ -17,4 +17,5 @@ public class UserDto {
     private String surname;
     private String userName;
     private LocalDateTime createdAt;
+    private byte[] userProfileImage;
 }

@@ -1,5 +1,6 @@
 package com.project.threadsclone.service;
 
+import com.project.threadsclone.Util.ImageUtils;
 import com.project.threadsclone.dto.UserDto;
 import com.project.threadsclone.dto.converter.UserDtoConverter;
 import com.project.threadsclone.dto.request.CreateUserRequest;
@@ -8,7 +9,9 @@ import com.project.threadsclone.exception.UserNotFoundException;
 import com.project.threadsclone.model.User;
 import com.project.threadsclone.repository.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -51,15 +54,26 @@ public class UserService {
         return userDtoConverter.convert(userRepository.save(user));
     }
 
-    protected User findUserById(Long id){
-        return userRepository.findById(id).orElseThrow(() ->
-                new UserNotFoundException("User Not Found id : " + id));
+    public UserDto updateUserProfileImage(MultipartFile file, Long id) throws IOException {
+        User user = findUserById(id);
+        user.setUserProfileImage(ImageUtils.compressImage(file.getBytes()));
+        return userDtoConverter.convert(userRepository.save(user));
     }
 
+    public byte[] getImageData(Long id){
+        User user = findUserById(id);
+        return ImageUtils.decompressImage(user.getUserProfileImage());
+    }
 
     public void deleteUserById(Long id) {
         findUserById(id);
 
         userRepository.deleteById(id);
     }
+
+    protected User findUserById(Long id){
+        return userRepository.findById(id).orElseThrow(() ->
+                new UserNotFoundException("User Not Found id : " + id));
+    }
+
 }
