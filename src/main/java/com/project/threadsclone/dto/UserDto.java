@@ -17,6 +17,4 @@ public class UserDto {
     private String surname;
     private String userName;
     private LocalDateTime createdAt;
-    private List<FollowerDto> followers;
-    private List<FollowingDto> followings;
 }

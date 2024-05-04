@@ -30,10 +30,6 @@ public class User {
     private String password;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     private LocalDateTime createdAt;
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Follower> followers;
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Following> followings;
 
     public User(String name, String surname, String userName, String mail, String password, LocalDateTime createdAt) {
         this.name = name;
@@ -42,7 +38,5 @@ public class User {
         this.mail = mail;
         this.password = password;
         this.createdAt = createdAt;
-        this.followers = new ArrayList<>();
-        this.followings = new ArrayList<>();
     }
 }

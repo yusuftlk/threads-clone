@@ -56,6 +56,7 @@ public class UserService {
                 new UserNotFoundException("User Not Found id : " + id));
     }
 
+
     public void deleteUserById(Long id) {
         findUserById(id);
 
