@@ -4,6 +4,7 @@ import com.project.threadsclone.dto.UserDto;
 import com.project.threadsclone.dto.request.CreateUserRequest;
 import com.project.threadsclone.dto.request.UpdateUserRequest;
 import com.project.threadsclone.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -34,12 +35,12 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserDto> createUser(@RequestBody CreateUserRequest createUserRequest){
+    public ResponseEntity<UserDto> createUser(@Valid @RequestBody CreateUserRequest createUserRequest){
         return ResponseEntity.ok(userService.createUser(createUserRequest));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserDto> updateUser(@RequestBody UpdateUserRequest updateUserRequest,
+    public ResponseEntity<UserDto> updateUser(@Valid @RequestBody UpdateUserRequest updateUserRequest,
                                               @PathVariable Long id){
         return ResponseEntity.ok(userService.updateUser(updateUserRequest, id));
     }

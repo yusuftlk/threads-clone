@@ -8,6 +8,7 @@ import com.project.threadsclone.model.Post;
 import com.project.threadsclone.service.LikesService;
 import com.project.threadsclone.service.PostService;
 import com.project.threadsclone.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,7 +21,7 @@ public class LikesController {
     }
 
     @PostMapping
-    public LikesDto createLikes(@RequestBody CreateLikesRequest createLikesRequest){
+    public LikesDto createLikes(@Valid  @RequestBody CreateLikesRequest createLikesRequest){
         return likesService.createLikes(createLikesRequest);
     }
     @DeleteMapping("/{id}")

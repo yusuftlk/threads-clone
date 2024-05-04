@@ -4,6 +4,7 @@ import com.project.threadsclone.dto.request.CreateFollowRequest;
 import com.project.threadsclone.model.Follow;
 import com.project.threadsclone.service.FollowService;
 import jakarta.persistence.GeneratedValue;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class FollowController {
     }
 
     @PostMapping("/follow")
-    public Follow createFollow(@RequestBody CreateFollowRequest createFollowRequest) {
+    public Follow createFollow(@Valid @RequestBody CreateFollowRequest createFollowRequest) {
         return followService.createFollow(createFollowRequest);
     }
     @DeleteMapping("/unfollow")

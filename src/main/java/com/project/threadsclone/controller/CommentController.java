@@ -4,6 +4,7 @@ import com.project.threadsclone.dto.CommentDto;
 import com.project.threadsclone.dto.request.CreateCommentRequest;
 import com.project.threadsclone.dto.request.UpdateCommentRequest;
 import com.project.threadsclone.service.CommentService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,12 +18,12 @@ public class CommentController {
         this.commentService = commentService;
     }
     @PostMapping
-    public ResponseEntity<CommentDto> createComment(@RequestBody CreateCommentRequest createCommentRequest){
+    public ResponseEntity<CommentDto> createComment(@Valid @RequestBody CreateCommentRequest createCommentRequest){
         return ResponseEntity.ok(commentService.createComment(createCommentRequest));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CommentDto> updateComment(@PathVariable Long id, @RequestBody UpdateCommentRequest updateCommentRequest){
+    public ResponseEntity<CommentDto> updateComment(@Valid @PathVariable Long id, @RequestBody UpdateCommentRequest updateCommentRequest){
         return  ResponseEntity.ok(commentService.updateComment(updateCommentRequest, id));
     }
 

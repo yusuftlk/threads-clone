@@ -5,6 +5,7 @@ import com.project.threadsclone.dto.UserDto;
 import com.project.threadsclone.dto.converter.UserDtoConverter;
 import com.project.threadsclone.dto.request.CreateUserRequest;
 import com.project.threadsclone.dto.request.UpdateUserRequest;
+import com.project.threadsclone.exception.UserAlreadyExistException;
 import com.project.threadsclone.exception.UserNotFoundException;
 import com.project.threadsclone.model.User;
 import com.project.threadsclone.repository.UserRepository;
@@ -36,11 +37,25 @@ public class UserService {
     }
 
     public UserDto createUser(CreateUserRequest createUserRequest) {
+        userAlreadyExistOrNot(createUserRequest);
+
         User user =  new User(createUserRequest.getName(),createUserRequest.getSurname(),
                 createUserRequest.getUserName(), createUserRequest.getMail(),
                 createUserRequest.getPassword(), LocalDateTime.now());
 
         return userDtoConverter.convert(userRepository.save(user));
+    }
+
+    private void userAlreadyExistOrNot(CreateUserRequest createUserRequest) {
+        Optional<User> username = userRepository.findByUserName(createUserRequest.getUserName());
+        if(username.isPresent()){
+            throw new UserAlreadyExistException("User Already Exist userName : " + createUserRequest.getUserName());
+        }
+
+        Optional<User> mail = userRepository.findByMail(createUserRequest.getMail());
+        if(mail.isPresent()){
+            throw new UserAlreadyExistException("User Already Exist mail : " + createUserRequest.getMail());
+        }
     }
 
     public UserDto updateUser(UpdateUserRequest updateUserRequest, Long id) {

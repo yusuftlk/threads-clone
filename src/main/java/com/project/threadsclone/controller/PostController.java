@@ -4,6 +4,7 @@ import com.project.threadsclone.dto.PostDto;
 import com.project.threadsclone.dto.request.CreatePostRequest;
 import com.project.threadsclone.dto.request.UpdatePostRequest;
 import com.project.threadsclone.service.PostService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,12 +32,12 @@ public class PostController {
     }
 
     @PostMapping
-    public ResponseEntity<PostDto> createPost(@RequestBody CreatePostRequest createPostRequest){
+    public ResponseEntity<PostDto> createPost(@Valid @RequestBody CreatePostRequest createPostRequest){
         return ResponseEntity.ok(postService.createPost(createPostRequest));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PostDto> updatePost(@RequestBody UpdatePostRequest updatePostRequest,
+    public ResponseEntity<PostDto> updatePost(@Valid @RequestBody UpdatePostRequest updatePostRequest,
                                               @PathVariable Long id){
         return ResponseEntity.ok(postService.updatePost(updatePostRequest, id));
     }

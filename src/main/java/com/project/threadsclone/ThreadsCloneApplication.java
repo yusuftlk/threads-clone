@@ -9,5 +9,4 @@ public class ThreadsCloneApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ThreadsCloneApplication.class, args);
 	}
-
 }
