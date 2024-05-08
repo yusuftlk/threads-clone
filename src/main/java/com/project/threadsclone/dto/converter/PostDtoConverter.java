@@ -20,8 +20,8 @@ public class PostDtoConverter {
 
     public PostDto convert(Post post){
         return new PostDto(post.getId(), post.getTitle(), post.getTotalLike(), post.getTotalComment(),
-                post.getCreatedAt(), post.getImage(), commentDtoConverter.convert(post.getComments()),
-                likesDtoConverter.convert(post.getLikes()));
+                post.getCreatedAt(), commentDtoConverter.convert(post.getComments()),
+                likesDtoConverter.convert(post.getLikes()),post.getPostImage());
     }
 
     public List<PostDto> convert(List<Post> postList){

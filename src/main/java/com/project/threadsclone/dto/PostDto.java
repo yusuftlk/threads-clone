@@ -17,9 +17,9 @@ public class PostDto {
     private Integer totalLike;
     private Integer totalComment;
     private LocalDateTime createdAt;
-    private String image;
     private List<CommentDto> comments;
     private List<LikesDto> likes;
+    private byte[] postImage;
 
 
 }

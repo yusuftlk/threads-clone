@@ -4,6 +4,7 @@ import com.project.threadsclone.dto.CommentDto;
 import com.project.threadsclone.dto.LikesDto;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -18,7 +19,6 @@ public class UpdatePostRequest {
     @NotBlank(message = "title is not be empty")
     private String title;
 
-    @NotBlank(message = "image is not be empty")
-    private String image;
+    private MultipartFile file;
 
 }

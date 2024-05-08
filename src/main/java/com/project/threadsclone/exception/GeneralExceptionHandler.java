@@ -29,7 +29,8 @@ public class GeneralExceptionHandler {
             CommentNotFoundException.class,
             UserAlreadyExistException.class,
             FollowNotFoundException.class,
-            FollowAlreadyExistException.class})
+            FollowAlreadyExistException.class
+            ,PostImageNullException.class})
     public Map<String, String> handleNotFoundException(RuntimeException exception) {
         Map<String, String> errorMap = new HashMap<>();
         errorMap.put("Error Message", exception.getMessage());

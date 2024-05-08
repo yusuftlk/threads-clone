@@ -3,6 +3,9 @@ package com.project.threadsclone.dto.request;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.Optional;
 
 @Getter
 @Setter
@@ -18,6 +21,6 @@ public class CreatePostRequest {
     @NotBlank(message = "title is not be empty")
     private String title;
 
-    private String image;
+    private MultipartFile file;
 
 }
