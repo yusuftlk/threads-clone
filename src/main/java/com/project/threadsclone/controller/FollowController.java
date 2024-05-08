@@ -1,5 +1,6 @@
 package com.project.threadsclone.controller;
 
+import com.project.threadsclone.dto.FollowDto;
 import com.project.threadsclone.dto.request.CreateFollowRequest;
 import com.project.threadsclone.model.Follow;
 import com.project.threadsclone.service.FollowService;
@@ -20,21 +21,22 @@ public class FollowController {
     }
 
     @PostMapping("/follow")
-    public Follow createFollow(@Valid @RequestBody CreateFollowRequest createFollowRequest) {
+    public FollowDto createFollow(@Valid @RequestBody CreateFollowRequest createFollowRequest) {
         return followService.createFollow(createFollowRequest);
     }
     @DeleteMapping("/unfollow")
-    public void deleteFollow(@RequestParam Long userId, Long followingId) {
+    public void deleteFollow(@RequestParam Long followerId, Long followingId) {
 
-        followService.deleteFollow(userId, followingId);
+        followService.deleteFollow(followerId, followingId);
     }
 
     @GetMapping("/follower/{userId}")
-    public List<Follow> getFollowers(@PathVariable Long userId) {
+    public List<FollowDto> getFollowers(@PathVariable Long userId) {
         return followService.getFollowers(userId);
     }
     @GetMapping("/following/{userId}")
-    public List<Follow> getFollowing(@PathVariable Long userId) {
+    public List<FollowDto> getFollowing(@PathVariable Long userId) {
+
         return followService.getFollowing(userId);
     }
 }

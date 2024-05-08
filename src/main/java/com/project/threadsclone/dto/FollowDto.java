@@ -3,7 +3,7 @@ package com.project.threadsclone.dto;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -11,12 +11,9 @@ import java.util.List;
 @Builder
 @EqualsAndHashCode
 @ToString
-public class UserDto {
+public class FollowDto {
     private Long id;
-    private String name;
-    private String surname;
-    private String userName;
+    private Long followerId;
+    private Long followingId;
     private LocalDateTime createdAt;
-    private byte[] userProfileImage;
-    private boolean isActive;
 }

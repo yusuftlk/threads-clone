@@ -2,6 +2,7 @@ package com.project.threadsclone.dto.request;
 
 import com.project.threadsclone.dto.UserDto;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -14,7 +15,7 @@ import java.time.LocalDateTime;
 @Builder
 public class CreateLikesRequest {
 
-    @NotBlank(message = "userId is not be empty")
+    @NotNull(message = "userId is not be empty")
     private Long userId;
 
     @NotBlank(message = "postId is not be empty")

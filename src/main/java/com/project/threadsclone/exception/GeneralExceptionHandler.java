@@ -27,7 +27,9 @@ public class GeneralExceptionHandler {
     @ExceptionHandler({UserNotFoundException.class,
             PostNotFoundException.class,
             CommentNotFoundException.class,
-            UserAlreadyExistException.class})
+            UserAlreadyExistException.class,
+            FollowNotFoundException.class,
+            FollowAlreadyExistException.class})
     public Map<String, String> handleNotFoundException(RuntimeException exception) {
         Map<String, String> errorMap = new HashMap<>();
         errorMap.put("Error Message", exception.getMessage());

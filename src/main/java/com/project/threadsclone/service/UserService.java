@@ -14,8 +14,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -40,7 +43,7 @@ public class UserService {
         userAlreadyExistOrNot(createUserRequest);
 
         User user =  new User(createUserRequest.getName(),createUserRequest.getSurname(),
-                createUserRequest.getUserName(), createUserRequest.getMail(),
+                createUserRequest.getUserName(), createUserRequest.getMail(), createUserRequest.getNumber(),
                 createUserRequest.getPassword(), LocalDateTime.now());
 
         return userDtoConverter.convert(userRepository.save(user));
@@ -59,11 +62,13 @@ public class UserService {
     }
 
     public UserDto updateUser(UpdateUserRequest updateUserRequest, Long id) {
+
         User user = findUserById(id);
 
         user.setName(updateUserRequest.getName());
         user.setSurname(updateUserRequest.getSurname());
         user.setUserName(updateUserRequest.getUserName());
+        user.setNumber(updateUserRequest.getNumber());
         user.setPassword(updateUserRequest.getPassword());
 
         return userDtoConverter.convert(userRepository.save(user));
@@ -86,9 +91,25 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
+    protected List<Long> getActiveUsers(List<Long> ids){
+
+        List<Long> activeUsers = ids.stream()
+                .map(this::findUserById)
+                .filter(User::isActive)
+                .map(User::getId)
+                .collect(Collectors.toList());
+        return activeUsers;
+    }
+
     protected User findUserById(Long id){
         return userRepository.findById(id).orElseThrow(() ->
                 new UserNotFoundException("User Not Found id : " + id));
     }
 
+    public UserDto activeUser(Long id) {
+        User user = findUserById(id);
+        if (user.isActive()) user.setActive(false);
+        else user.setActive(true);
+        return userDtoConverter.convert(userRepository.save(user));
+    }
 }

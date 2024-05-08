@@ -22,6 +22,9 @@ public class UpdateUserRequest {
     private String userName;
 
     @NotBlank(message = "name is not be empty")
+    private String number;
+
+    @NotBlank(message = "name is not be empty")
     @PasswordConstraint
     private String password;
 }

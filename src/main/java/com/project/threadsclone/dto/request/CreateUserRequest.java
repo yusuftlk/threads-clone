@@ -25,6 +25,9 @@ public class CreateUserRequest {
     @Email(message = "mail is not valid")
     private String mail;
 
+    @NotBlank(message = "number is not be empty")
+    private String number;
+
     @NotBlank(message = "password is not be empty")
     @PasswordConstraint
     private String password;

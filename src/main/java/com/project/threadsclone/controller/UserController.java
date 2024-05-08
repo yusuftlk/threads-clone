@@ -63,6 +63,11 @@ public class UserController {
 
         userService.deleteUserById(id);
     }
+
+    @PutMapping("/active/{id}")
+    public ResponseEntity<UserDto> activeUser(@PathVariable Long id){
+        return ResponseEntity.ok(userService.activeUser(id));
+    }
 }
 
 

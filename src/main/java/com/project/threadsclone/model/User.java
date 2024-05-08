@@ -27,6 +27,9 @@ public class User {
     private String userName;
     @Column(unique=true)
     private String mail;
+
+    private String number;
+
     private String password;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     private LocalDateTime createdAt;
@@ -34,11 +37,14 @@ public class User {
     @Column(name = "userProfileImage",length = 1000)
     private byte[] userProfileImage;
 
-    public User(String name, String surname, String userName, String mail, String password, LocalDateTime createdAt) {
+    private boolean isActive = true;
+
+    public User(String name, String surname, String userName, String mail, String number, String password, LocalDateTime createdAt) {
         this.name = name;
         this.surname = surname;
         this.userName = userName;
         this.mail = mail;
+        this.number = number;
         this.password = password;
         this.createdAt = createdAt;
     }
