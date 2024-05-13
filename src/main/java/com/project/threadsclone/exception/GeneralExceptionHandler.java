@@ -1,7 +1,9 @@
 package com.project.threadsclone.exception;
 
-import org.springframework.dao.DataIntegrityViolationException;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -12,6 +14,10 @@ import java.util.Map;
 
 @RestControllerAdvice
 public class GeneralExceptionHandler {
+    @ExceptionHandler(TokenExpiredException.class)
+    public ResponseEntity<String> handleCustomTokenExpiredException(TokenExpiredException ex) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Token expired: " + ex.getMessage());
+    }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -30,7 +36,9 @@ public class GeneralExceptionHandler {
             UserAlreadyExistException.class,
             FollowNotFoundException.class,
             FollowAlreadyExistException.class
-            ,PostImageNullException.class})
+            ,PostImageNullException.class
+            ,UserImageNullException.class,
+            IncorrectUserException.class})
     public Map<String, String> handleNotFoundException(RuntimeException exception) {
         Map<String, String> errorMap = new HashMap<>();
         errorMap.put("Error Message", exception.getMessage());

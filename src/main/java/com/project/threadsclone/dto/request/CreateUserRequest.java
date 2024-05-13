@@ -1,9 +1,12 @@
 package com.project.threadsclone.dto.request;
 
 import com.project.threadsclone.config.PasswordConstraint;
+import com.project.threadsclone.model.Role;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.*;
 import lombok.*;
+
+import java.util.Set;
 
 @Getter
 @Setter
@@ -19,7 +22,7 @@ public class CreateUserRequest {
     private String surname;
 
     @NotBlank(message = "username is not be empty")
-    private String userName;
+    private String username;
 
     @NotBlank(message = "mail is not be empty")
     @Email(message = "mail is not valid")
@@ -31,4 +34,6 @@ public class CreateUserRequest {
     @NotBlank(message = "password is not be empty")
     @PasswordConstraint
     private String password;
+
+    private Set<Role> authorities;
 }
