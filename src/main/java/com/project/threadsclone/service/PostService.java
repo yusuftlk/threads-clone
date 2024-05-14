@@ -24,7 +24,6 @@ public class PostService {
     private final PostDtoConverter postDtoConverter;
     private final UserService userService;
 
-
     public PostService(PostRepository postRepository, PostDtoConverter postDtoConverter, UserService userService) {
         this.postRepository = postRepository;
         this.postDtoConverter = postDtoConverter;
@@ -35,7 +34,7 @@ public class PostService {
         if (userId.isPresent()){
             return postDtoConverter.convert(postRepository.findByUserId(userId));
 
-        }else return postDtoConverter.convert(postRepository.findAll());
+        }else return postDtoConverter.convert(postRepository.findAllByOrderByCreatedAtDesc());
     }
 
     public PostDto createPost(CreatePostRequest createPostRequest) {
@@ -81,6 +80,5 @@ public class PostService {
             throw new PostImageNullException("Post image Empty");
         }
         return ImageUtils.decompressImage(post.getPostImage());
-
     }
 }
