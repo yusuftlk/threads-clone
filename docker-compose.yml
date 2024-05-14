@@ -17,6 +17,7 @@ services:
     networks:
       - threadsclone-mysql
 
+
   threadsApp-be:
     image: threads-clone
     build: .
